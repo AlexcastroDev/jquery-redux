@@ -1,7 +1,15 @@
-var redux = Redux.createStore(store.reducers.people)
+var rootReducer = {
+    user: store.reducers.user,
+    people: store.reducers.people,
+}
+var redux = Redux.createStore(Redux.combineReducers(rootReducer))
 
 redux.subscribe(function() {
-    const datagrid = redux.getState().people
+    const datagrid = redux.getState().people.allowedlist
+    const user = redux.getState().user.user
+
+    $('#user').html(user.name)
+    $('#datatable').html('')
 
     datagrid.forEach(function(row, rowKey) {
         $('#datatable').append(`<tr class='row-${rowKey}'></tr>`)
@@ -10,5 +18,4 @@ redux.subscribe(function() {
             $(`.row-${rowKey}`).append(`<td>${column}</td>`)
         })
     })
-    
 })

@@ -18,3 +18,16 @@ var addRow = function() {
     ]})
 }
 
+var getUser = function() {
+    $('#user').append('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>')
+    
+    setTimeout(() => {
+        redux.dispatch({ type: store.actions.ADD_USER, payload: 
+            {
+                name: 'Alex',
+                age: '26',
+            }
+        })
+    }, 3000)
+    
+}
